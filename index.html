@@ -1,0 +1,254 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday!</title>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    overflow: hidden;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #17002e, #42145e, #8c267d);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    padding: 20px;
+}
+
+.container {
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+    padding: 35px 20px;
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 25px;
+    background: rgba(255,255,255,0.10);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 0 40px rgba(255, 105, 180, 0.25);
+    z-index: 2;
+    animation: appear 1.5s ease;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: scale(0.7);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.cake {
+    font-size: 90px;
+    margin-bottom: 15px;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+}
+
+h1 {
+    font-size: clamp(32px, 8vw, 48px);
+    color: #ffb6e6;
+    text-shadow: 0 0 15px #ff4fc3;
+    margin-bottom: 15px;
+    animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+    from { text-shadow: 0 0 10px #ff4fc3; }
+    to { text-shadow: 0 0 30px #fff, 0 0 40px #ff4fc3; }
+}
+
+.name {
+    color: #ffe66d;
+    font-size: 32px;
+    font-weight: bold;
+    margin: 15px 0;
+}
+
+.message {
+    font-size: 17px;
+    line-height: 1.8;
+    color: #fff0fa;
+    margin: 20px 0;
+}
+
+button {
+    background: linear-gradient(45deg, #ff4fc3, #ff8a65);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 50px;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 5px 20px rgba(255,79,195,0.4);
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 25px #ff4fc3;
+}
+
+/* Floating balloons */
+
+.balloon {
+    position: absolute;
+    bottom: -150px;
+    font-size: 45px;
+    animation: float 10s linear infinite;
+    z-index: 1;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+    10% { opacity: 1; }
+    100% {
+        transform: translateY(-120vh) rotate(20deg);
+        opacity: 0;
+    }
+}
+
+.balloon:nth-child(1) { left: 5%; animation-delay: 0s; }
+.balloon:nth-child(2) { left: 25%; animation-delay: 3s; }
+.balloon:nth-child(3) { left: 75%; animation-delay: 1s; }
+.balloon:nth-child(4) { left: 90%; animation-delay: 5s; }
+
+.footer {
+    margin-top: 25px;
+    font-size: 13px;
+    color: #ffd6f1;
+}
+
+@media(max-width: 480px) {
+    .container {
+        padding: 30px 18px;
+    }
+
+    .cake {
+        font-size: 75px;
+    }
+
+    .message {
+        font-size: 15px;
+    }
+
+    .name {
+        font-size: 27px;
+    }
+
+    button {
+        padding: 13px 25px;
+        font-size: 15px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="balloon">🎈</div>
+<div class="balloon">🎈</div>
+<div class="balloon">🎈</div>
+<div class="balloon">🎈</div>
+
+<div class="container">
+
+    <div class="cake">🎂</div>
+
+    <h1>Happy Birthday!</h1>
+
+    <div class="name">pasandida orat❤️</div>
+
+    <p class="message">
+        May your special day be filled with endless happiness,
+        beautiful memories, love, and laughter.
+        <br><br>
+        May Allah bless you with good health,
+        success, peace, and countless blessings.
+        May all your dreams come true!
+        <br><br>
+        Keep smiling and shining! ✨
+    </p>
+
+    <button onclick="celebrate()">
+        🎉 Celebrate!
+    </button>
+
+    <div class="footer">
+        Made with ❤️ Just for You
+    </div>
+
+</div>
+
+<script>
+
+// Initial confetti
+window.onload = function() {
+    celebrate();
+};
+
+// Confetti animation
+function celebrate() {
+
+    const duration = 4000;
+    const end = Date.now() + duration;
+
+    (function frame() {
+
+        confetti({
+            particleCount: 5,
+            angle: 60,
+            spread: 60,
+            origin: { x: 0 },
+            colors: ['#ff4fc3', '#ffe66d', '#ffffff', '#00ffff']
+        });
+
+        confetti({
+            particleCount: 5,
+            angle: 120,
+            spread: 60,
+            origin: { x: 1 },
+            colors: ['#ff4fc3', '#ffe66d', '#ffffff', '#00ffff']
+        });
+
+        if (Date.now() < end) {
+            requestAnimationFrame(frame);
+        }
+
+    })();
+
+    // Big confetti explosion
+    confetti({
+        particleCount: 150,
+        spread: 100,
+        origin: { y: 0.6 }
+    });
+}
+
+</script>
+
+</body>
+</html>
+```
